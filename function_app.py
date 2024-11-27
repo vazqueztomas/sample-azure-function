@@ -1,13 +1,14 @@
 import azure.functions as func
 import logging
 from sample_azure_function.sample_function import bp
+from sample_azure_function.sample_function.orchestrator import df_bp as orchestrator_bp
 
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 
 # Register the blueprint (sample_function)
 app.register_functions(bp)
-
+app.register_functions(orchestrator_bp)
 @app.route(route="http_trigger")
 def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
