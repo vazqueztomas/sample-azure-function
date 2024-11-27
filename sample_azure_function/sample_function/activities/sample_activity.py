@@ -1,3 +1,8 @@
-from azure.functions import func
+from sample_function.orchestrator import df_bp
+import logging
 
-bp = func.Blueprint()
+
+@df_bp.activity_trigger(input_name="city")
+def say_hello(city: str) -> str:
+    logging.info(f"Saying hello to {city}")
+    return f"Hello {city}!"

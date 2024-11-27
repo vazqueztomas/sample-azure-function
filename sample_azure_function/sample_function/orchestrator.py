@@ -1,7 +1,6 @@
 import logging
 import azure.functions as func
 import azure.durable_functions as df
-import logging
 
 df_bp = df.Blueprint()
 
@@ -22,8 +21,3 @@ def my_orchestrator(context: df.DurableOrchestrationContext):
     result3 = yield context.call_activity("say_hello", "London")
     return [result1, result2, result3]
 
-
-@df_bp.activity_trigger(input_name="city")
-def say_hello(city: str) -> str:
-    logging.info(f"Saying hello to {city}")
-    return f"Hello {city}!"
